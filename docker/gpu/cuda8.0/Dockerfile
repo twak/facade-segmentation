@@ -19,7 +19,7 @@ MAINTAINER femianjc@miamioh.edu
 #
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        curl && \
+        curl wget && \
     rm -rf /var/lib/apt/lists/*
 
 ENV CUDNN_VERSION 3.0.7
@@ -27,10 +27,9 @@ LABEL com.nvidia.cudnn.version="${CUDNN_VERSION}"
 
 # cuDNN license: https://developer.nvidia.com/cudnn/license_agreement
 RUN CUDNN_DOWNLOAD_SUM=98679d5ec039acfd4d81b8bfdc6a6352d6439e921523ff9909d364e706275c2b && \
-    curl -fsSL http://developer.download.nvidia.com/compute/redist/cudnn/v3/cudnn-7.0-linux-x64-v3.0-prod.tgz -O && \
-    echo "$CUDNN_DOWNLOAD_SUM  cudnn-7.0-linux-x64-v3.0-prod.tgz" | sha256sum -c --strict - && \
-    tar --no-same-owner -xzf cudnn-7.0-linux-x64-v3.0-prod.tgz -C /usr/local && \
-    rm cudnn-7.0-linux-x64-v3.0-prod.tgz && \
+    wget http://geometry.cs.ucl.ac.uk/projects/2017/bigsur/cudnn-7.0-linux-x64-v3.0.8-prod.tgz && \
+    tar --no-same-owner -xzf cudnn-7.0-linux-x64-v3.0.8-prod.tgz -C /usr/local && \
+    rm cudnn-7.0-linux-x64-v3.0.8-prod.tgz && \
     ldconfig
 
 
